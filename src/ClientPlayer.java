@@ -6,9 +6,6 @@
 
 import java.text.DateFormat;
 import java.util.GregorianCalendar;
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 /**
  *
@@ -66,7 +63,7 @@ public class ClientPlayer {
             if(x == 0)
             {   
                 
-                if(server.equals(""))
+                if(server.isEmpty())
                 {
                     new RandomPlayer("RandomPlayer " + timenow);
                 }
@@ -76,11 +73,11 @@ public class ClientPlayer {
             }
             else if(x==1)
             {
-                if(playername.equals(""))
+                if(playername.isEmpty())
                 {
                     playername = JOptionPane.showInputDialog("Enter player name");
                 }
-                if(server.equals(""))
+                if(server.isEmpty())
                 {
                     new HumanPlayer(playername);
                 }
@@ -88,7 +85,7 @@ public class ClientPlayer {
             }
             else if(x==2)
             {
-               if(server.equals(""))
+               if(server.isEmpty())
                 {
                     new MiniMaxPlayer("MiniMaxPlayer " + timenow);
                 }
@@ -96,7 +93,7 @@ public class ClientPlayer {
             }
             else if(x==3)
             {
-                if(server.equals(""))
+                if(server.isEmpty())
                 {
                     new RandomPlayer("AlphaBetaPlayer " + timenow);
                 }
@@ -104,7 +101,7 @@ public class ClientPlayer {
             }           
             else if(x==4)
             {
-                if(server.equals(""))
+                if(server.isEmpty())
                 {
                     new RandomPlayer("RandomPlayer " + timenow);
                 }
@@ -112,7 +109,7 @@ public class ClientPlayer {
             }
             else if(x==5)
             {
-                if(server.equals(""))
+                if(server.isEmpty())
                 {
                     new RandomPlayer("RandomPlayer " + timenow);
                 }

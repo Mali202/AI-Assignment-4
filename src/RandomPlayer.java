@@ -29,9 +29,9 @@ public class RandomPlayer implements Player
     
     Random r = new Random();
     
-    int Port = 2001;
-    String Server = "Local";
-    String PlayerName = "RandomPlayer";
+    int Port;
+    String Server;
+    String PlayerName;
     
     public RandomPlayer()
     {
@@ -76,8 +76,7 @@ public class RandomPlayer implements Player
         }
         catch(IOException ioe)
         {
-            
-            ioe.printStackTrace();
+            System.out.println("Error: " + ioe.getMessage());
         }             
     
     }

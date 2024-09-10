@@ -41,10 +41,7 @@ public class BoardDataStructure {
         
         for(int r =0; r < BoardSize; r++)
         {
-            for(int c = 0; c < BoardSize; c++)
-            {
-                temp.Board[r][c] = this.Board[r][c];
-            }
+            System.arraycopy(this.Board[r], 0, temp.Board[r], 0, BoardSize);
         }
         return temp;
     }
@@ -80,7 +77,7 @@ public class BoardDataStructure {
             s = "";
         }
         
-        System.out.println("");
+        System.out.println();
         
     }
 

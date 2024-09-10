@@ -44,9 +44,9 @@ public class HumanPlayer extends Frame implements Player {
     boolean thismove = false;
     String TheMove;
     
-    int Port = 2001;
-    String Server = "Local";
-    String PlayerName = "HumanPlayer";
+    int Port;
+    String Server;
+    String PlayerName;
     
     /** Creates a new instance of DisplayFrame */
     public HumanPlayer()
@@ -115,7 +115,6 @@ public class HumanPlayer extends Frame implements Player {
         }
         catch(Exception ioe)
         {
-            ioe.printStackTrace();
             System.out.println(ioe.getMessage());
         }     
     }

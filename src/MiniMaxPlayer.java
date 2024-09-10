@@ -17,9 +17,9 @@ public class MiniMaxPlayer implements Player {
     int Side;
     int ResponseTime;
 
-    int Port = 2001;
-    String Server = "Local";
-    String PlayerName = "MiniMaxPlayer";
+    int Port;
+    String Server;
+    String PlayerName;
 
     public MiniMaxPlayer()
     {
@@ -72,6 +72,11 @@ public class MiniMaxPlayer implements Player {
 
     @Override
     public String MakeMove(String board) {
+        return "";
+    }
+
+    public String RandomMove(String board)
+    {
         return "";
     }
 

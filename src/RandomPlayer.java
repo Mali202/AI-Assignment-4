@@ -144,15 +144,15 @@ public class RandomPlayer implements Player
    @Override
     public String MakeMove(String board) 
     {
-        BoardDataStructure temp = new BoardDataStructure(BoardSize);
-        StringTokenizer st = new StringTokenizer(board, ",");
+        BoardDataStructure temp = BoardDataStructure.GetBoardFromString(board, BoardSize);
+        /*StringTokenizer st = new StringTokenizer(board, ",");
         for(int r =0; r < BoardSize; r++)
         {
             for(int c = 0; c < BoardSize; c++)
             {
                 temp.Board[c][r] = Integer.parseInt(st.nextToken());
             }
-        }
+        }*/
         //just finds a random empty spot and plays at that spot
         while(true)
         {

@@ -1,9 +1,12 @@
+import org.javatuples.Pair;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class MiniMaxPlayer implements Player {
@@ -70,10 +73,65 @@ public class MiniMaxPlayer implements Player {
 
     }
 
+    /**
+     * Get Next Move via Minimax Algorithm
+     * @param board The current state of the board
+     * @return The move to be made by the player
+     */
     @Override
     public String MakeMove(String board) {
-        return "";
+        BoardDataStructure bds = BoardDataStructure.GetBoardFromString(board, BoardSize);
+        //Instant start = Instant.now();
+        Pair<Integer, String> pair = MiniMax(bds, true);
+        String move = pair.getValue1();
+        //Instant end = Instant.now();
+        System.out.println("Time taken: ");
+        return move;
     }
+
+    private Pair<Integer, String> MiniMax(BoardDataStructure bds, boolean maximizingPlayer) {
+        int state = bds.CheckWinner();
+        if (state != BoardDataStructure.Empty)
+        {
+            return state == Side ? Pair.with(1, "") : Pair.with(-1, "");
+        }
+
+        String bestMove = "";
+        List<Pair<Integer, Integer>> moves = bds.GetEmptySpots();
+        int bestScore;
+        if (maximizingPlayer)
+        {
+            bestScore = Integer.MIN_VALUE;
+            for (Pair<Integer, Integer> move : moves)
+            {
+                bds.ApplyMove(move.getValue0(), move.getValue1(), Side);
+                int score = MiniMax(bds, false).getValue0();
+                bds.TakeBackMove(move.getValue0(), move.getValue1());
+                if (score > bestScore)
+                {
+                    bestScore = score;
+                    bestMove = move.getValue0() + "," + move.getValue1();
+                }
+            }
+        }
+        else
+        {
+            bestScore = Integer.MAX_VALUE;
+            for (Pair<Integer, Integer> move : moves)
+            {
+                bds.ApplyMove(move.getValue0(), move.getValue1(), 3 - Side);
+                int score = MiniMax(bds, true).getValue0();
+                bds.TakeBackMove(move.getValue0(), move.getValue1());
+                if (score < bestScore)
+                {
+                    bestScore = score;
+                    bestMove = move.getValue0() + "," + move.getValue1();
+                }
+            }
+        }
+        return Pair.with(bestScore, bestMove);
+    }
+
 
     public String RandomMove(String board)
     {

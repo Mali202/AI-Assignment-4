@@ -151,17 +151,8 @@ public class HumanPlayer extends Frame implements Player {
         TheMove = BoardSize+","+BoardSize;
         
         long starttime = new GregorianCalendar().getTimeInMillis();
-        BoardDataStructure temp = new BoardDataStructure(BoardSize);
-        StringTokenizer st = new StringTokenizer(board, ",");
-        for(int r =0; r < BoardSize; r++)
-        {
-            for(int c = 0; c < BoardSize; c++)
-            {
-                temp.Board[c][r] = Integer.parseInt(st.nextToken());
-            }
-        }
-        
-        displayBDS = temp;
+
+        displayBDS = BoardDataStructure.GetBoardFromString(board, BoardSize);
         
         pc.repaint();
         thismove = true;

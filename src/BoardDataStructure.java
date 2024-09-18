@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 
+import org.javatuples.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
 /**
  *
  * @author MC
@@ -60,6 +66,21 @@ public class BoardDataStructure {
         }
         return s;
         
+    }
+
+    //Used to convert a string of moves seperated by a comma to a 2-d array board
+    public static BoardDataStructure GetBoardFromString(String s, int BS)
+    {
+        BoardDataStructure temp = new BoardDataStructure(BS);
+        StringTokenizer st = new StringTokenizer(s, ",");
+        for(int r =0; r < BS; r++)
+        {
+            for(int c = 0; c < BS; c++)
+            {
+                temp.Board[c][r] = Integer.parseInt(st.nextToken());
+            }
+        }
+        return temp;
     }
 
 
@@ -164,5 +185,30 @@ public class BoardDataStructure {
         
         return false;
     }
-    
+
+    //Apply a move to the board
+    public void ApplyMove(int row, int col, int player)
+    {
+        Board[col][row] = player;
+    }
+
+    //Take back a move from the board
+    public void TakeBackMove(int row, int col)
+    {
+        Board[col][row] = Empty;
+    }
+
+    //Get Empty Spots on the board
+    public List<Pair<Integer, Integer>> GetEmptySpots()
+    {
+        List<Pair<Integer, Integer>> emptySpots = new ArrayList<>();
+        for(int r =0; r < BoardSize; r++)
+        {
+            for(int c = 0; c < BoardSize; c++)
+            {
+                if(Board[c][r] == Empty) emptySpots.add(Pair.with(r, c));
+            }
+        }
+        return emptySpots;
+    }
 }

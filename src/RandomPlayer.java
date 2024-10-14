@@ -19,50 +19,50 @@ import java.util.*;
 public class RandomPlayer implements Player
 {
     Socket connectToServer;
-    
-    BufferedReader isFromServer; 
-    PrintWriter osToServer; 
-    
+
+    BufferedReader isFromServer;
+    PrintWriter osToServer;
+
     int BoardSize;
     int Side;
     int ResponseTime;
-    
+
     Random r = new Random();
-    
-    int Port;
-    String Server;
-    String PlayerName;
-    
+
+    int Port = 2001;
+    String Server = "Local";
+    String PlayerName = "RandomPlayer";
+
     public RandomPlayer()
     {
         this("Local", 2001, "RandomPlayer");
     }
-    
+
     public RandomPlayer(String name)
     {
         this("Local", 2001, name);
     }
-            
+
     public RandomPlayer(String server, int port, String name)
     {
         PlayerName = name;
         Server= server;
-        Port = port;   
-        
+        Port = port;
+
         GetConnection();
-        boolean GameOver = false;       
+        boolean GameOver = false;
         try
         {
-            System.out.println("Starting Game"); 
+            System.out.println("Starting Game");
             while(!GameOver)
             {
-                
+
                 String nextL = isFromServer.readLine();
-                
+
                 if(nextL.length() > 1)
-                {                   
+                {
                     osToServer.println(MakeMove(nextL));
-                    osToServer.flush();                    
+                    osToServer.flush();
                 }
                 else
                 {
@@ -77,14 +77,15 @@ public class RandomPlayer implements Player
         catch(IOException ioe)
         {
             System.out.println("Error: " + ioe.getMessage());
-        }             
-    
+            ioe.printStackTrace();
+        }
+
     }
 
     @Override
     public void GetConnection() {
         try {
-           
+
             if(Server.equals("Local"))
             {
                 connectToServer = new Socket(InetAddress.getLocalHost(),Port);
@@ -92,7 +93,7 @@ public class RandomPlayer implements Player
             else connectToServer = new Socket(Server,Port);
             isFromServer = new BufferedReader(new InputStreamReader(connectToServer.getInputStream()));
             osToServer =  new PrintWriter(connectToServer.getOutputStream());
-            System.out.println("Connected");  
+            System.out.println("Connected");
             osToServer.println(PlayerName);
             osToServer.flush();
             String setup = isFromServer.readLine();
@@ -100,8 +101,8 @@ public class RandomPlayer implements Player
             StringTokenizer st = new StringTokenizer(setup, ",");
             BoardSize = Integer.parseInt(st.nextToken());
             Side = Integer.parseInt(st.nextToken());
-            ResponseTime = Integer.parseInt(st.nextToken());  
-            
+            ResponseTime = Integer.parseInt(st.nextToken());
+
         } catch (IOException ex) {
             System.out.println("Error: " + ex.getMessage());
         }        
@@ -130,7 +131,7 @@ public class RandomPlayer implements Player
                     row++;
                 }
                 if(row== BoardSize)
-                {                
+                {
                     row = 0;
                 }
             }
@@ -138,32 +139,24 @@ public class RandomPlayer implements Player
             cur.Board[col][row] = CurSide;
             return PlayRandomGame(cur, ((CurSide+1)%2)+1);
         }
-        
+
     }
 
-   @Override
-    public String MakeMove(String board) 
+    @Override
+    public String MakeMove(String board)
     {
         BoardDataStructure temp = BoardDataStructure.GetBoardFromString(board, BoardSize);
-        /*StringTokenizer st = new StringTokenizer(board, ",");
-        for(int r =0; r < BoardSize; r++)
-        {
-            for(int c = 0; c < BoardSize; c++)
-            {
-                temp.Board[c][r] = Integer.parseInt(st.nextToken());
-            }
-        }*/
         //just finds a random empty spot and plays at that spot
         while(true)
         {
             int col = r.nextInt(BoardSize);
             int row = r.nextInt(BoardSize);
-            if(temp.Board[row][col]== BoardDataStructure.Empty)
+            if(temp.Board[col][row]== BoardDataStructure.Empty)
             {
-                return col + "," + row;
+                return col+ "," + row;
             }
         }
-        
+
     }
-    
+
 }

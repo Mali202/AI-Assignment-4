@@ -25,18 +25,18 @@ public class BoardDataStructure {
     public static int RedMove = 1;
     public static int BlueMove = 2;
     public int BoardSize = 7;
-    
-    public int[][] Board; 
-    
+
+    public int[][] Board;
+
     public BoardDataStructure()
     {
-        Board = new int[BoardSize][BoardSize]; 
+        Board = new int[BoardSize][BoardSize];
     }
-    
+
     public BoardDataStructure(int BS)
-    {   
+    {
         BoardSize = BS;
-        Board = new int[BS][BS]; 
+        Board = new int[BS][BS];
     }
 
 
@@ -44,10 +44,13 @@ public class BoardDataStructure {
     public BoardDataStructure clone()
     {
         BoardDataStructure temp = new BoardDataStructure(BoardSize);
-        
+
         for(int r =0; r < BoardSize; r++)
         {
-            System.arraycopy(this.Board[r], 0, temp.Board[r], 0, BoardSize);
+            for(int c = 0; c < BoardSize; c++)
+            {
+                temp.Board[c][r] = this.Board[c][r];
+            }
         }
         return temp;
     }
@@ -65,7 +68,7 @@ public class BoardDataStructure {
             }
         }
         return s;
-        
+
     }
 
     //Used to convert a string of moves seperated by a comma to a 2-d array board
@@ -97,9 +100,9 @@ public class BoardDataStructure {
             System.out.println(s);
             s = "";
         }
-        
-        System.out.println();
-        
+
+        System.out.println("");
+
     }
 
 
@@ -112,26 +115,26 @@ public class BoardDataStructure {
         {
             if(CheckRecursion(temp, 0, c, RedMove)) return RedMove;
         }
-        
+
         //CheckBlue
-        for(int r = 0; r < BoardSize; r++)            
+        for(int r = 0; r < BoardSize; r++)
         {
             if(CheckRecursion(temp, r, 0, BlueMove)) return BlueMove;
         }
-        
+
         return Empty;
     }
-    
+
     public boolean CheckRecursion(BoardDataStructure bds, int row, int col, int Move)
     {
-             
-        
+
+
         if(bds.Board[col][row] == Move)
         {
             if((Move == RedMove)&&(row == BoardSize-1)) return true;
-        
-            if((Move == BlueMove)&&(col == BoardSize-1)) return true;  
-            
+
+            if((Move == BlueMove)&&(col == BoardSize-1)) return true;
+
             bds.Board[col][row] = Empty;
 
 
@@ -150,7 +153,7 @@ public class BoardDataStructure {
                     }
                 }
             }
-            
+
             if(row+1 < BoardSize)
             {
                 if(CheckRecursion(bds, row+1, col, Move))
@@ -165,7 +168,7 @@ public class BoardDataStructure {
                     }
                 }
             }
-            
+
             if(col+1 < BoardSize)
             {
                 if(CheckRecursion(bds, row, col+1, Move))
@@ -173,27 +176,27 @@ public class BoardDataStructure {
                     return true;
                 }
             }
-            
+
             if(col-1 >= 0)
             {
                 if(CheckRecursion(bds, row, col-1, Move))
                 {
                     return true;
                 }
-            }              
+            }
         }
-        
+
         return false;
     }
 
     //Apply a move to the board
-    public void ApplyMove(int row, int col, int player)
+    public void ApplyMove(int col, int row, int player)
     {
         Board[col][row] = player;
     }
 
     //Take back a move from the board
-    public void TakeBackMove(int row, int col)
+    public void TakeBackMove(int col, int row)
     {
         Board[col][row] = Empty;
     }
@@ -206,7 +209,7 @@ public class BoardDataStructure {
         {
             for(int c = 0; c < BoardSize; c++)
             {
-                if(Board[c][r] == Empty) emptySpots.add(Pair.with(r, c));
+                if(Board[c][r] == Empty) emptySpots.add(Pair.with(c, r));
             }
         }
         return emptySpots;

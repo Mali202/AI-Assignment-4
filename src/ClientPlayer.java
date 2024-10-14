@@ -95,7 +95,7 @@ public class ClientPlayer {
             {
                 if(server.isEmpty())
                 {
-                    new RandomPlayer("AlphaBetaPlayer " + timenow);
+                    new AlphaBetaPlayer("AlphaBetaPlayer " + timenow);
                 }
                 else new RandomPlayer(server, port, "AlphaBetaPlayer " + timenow);
             }           

@@ -5,8 +5,6 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.List;
 import java.util.StringTokenizer;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class AlphaBetaPlayer implements Player {
 
@@ -25,7 +23,7 @@ public class AlphaBetaPlayer implements Player {
 
     public AlphaBetaPlayer()
     {
-        PlayerName = "MiniMaxPlayer";
+        PlayerName = "AlphaBetaPlayer";
         BoardSize = 3;
         Side = 1;
     }

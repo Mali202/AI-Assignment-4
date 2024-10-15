@@ -65,9 +65,9 @@ public class ClientPlayer {
                 
                 if(server.isEmpty())
                 {
-                    new RandomPlayer("RandomPlayer " + timenow);
+                    new RandomPlayer("RandomPlayer-" + timenow);
                 }
-                else new RandomPlayer(server, port, "RandomPlayer " + timenow);
+                else new RandomPlayer(server, port, "RandomPlayer-" + timenow);
 
 
             }
@@ -87,23 +87,23 @@ public class ClientPlayer {
             {
                if(server.isEmpty())
                 {
-                    new MiniMaxPlayer("MiniMaxPlayer " + timenow);
+                    new MiniMaxPlayer("MiniMaxPlayer-" + timenow);
                 }
-                else new RandomPlayer(server, port, "MiniMaxPlayer " + timenow);
+                else new RandomPlayer(server, port, "MiniMaxPlayer-" + timenow);
             }
             else if(x==3)
             {
                 if(server.isEmpty())
                 {
-                    new AlphaBetaPlayer("AlphaBetaPlayer " + timenow);
+                    new AlphaBetaPlayer("AlphaBetaPlayer-" + timenow);
                 }
-                else new RandomPlayer(server, port, "AlphaBetaPlayer " + timenow);
+                else new RandomPlayer(server, port, "AlphaBetaPlayer-" + timenow);
             }           
             else if(x==4)
             {
                 if(server.isEmpty())
                 {
-                    new RandomPlayer("RandomPlayer " + timenow);
+                    new MonteCarloPlayer("MonteCarloPlayer-" + timenow);
                 }
                 else new RandomPlayer(server, port, "RandomPlayer " + timenow);          
             }

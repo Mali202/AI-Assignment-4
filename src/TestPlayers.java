@@ -1,7 +1,7 @@
 public class TestPlayers {
 
     public static void main(String[] args) {
-        MonteCarloPlayer player = new MonteCarloPlayer();
+        MonteCarloBanditPlayer player = new MonteCarloBanditPlayer();
         player.ResponseTime = 5;
         String boardState ="0,0,0,0,0,0,0,0,0";
         String move = player.MakeMove(boardState);

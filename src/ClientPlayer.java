@@ -105,15 +105,15 @@ public class ClientPlayer {
                 {
                     new MonteCarloPlayer("MonteCarloPlayer-" + timenow);
                 }
-                else new RandomPlayer(server, port, "RandomPlayer " + timenow);          
+                else new RandomPlayer(server, port, "MonteCarlo " + timenow);
             }
             else if(x==5)
             {
                 if(server.isEmpty())
                 {
-                    new RandomPlayer("RandomPlayer " + timenow);
+                    new MonteCarloBanditPlayer("MonteCarloBandit " + timenow);
                 }
-                else new RandomPlayer(server, port, "RandomPlayer " + timenow);
+                else new RandomPlayer(server, port, "MonteCarloBandit " + timenow);
             }
             
             
